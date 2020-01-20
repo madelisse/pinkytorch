@@ -10,6 +10,16 @@ import {
 } from 'react-native';
 
 export default class App extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            //dataSource: ds,
+            nEstadoTorch: true,
+        }
+
+    }
+
     PressButton = () => {
         //alert("entro a la funcion");
         if (Platform.OS === 'ios') {
@@ -19,9 +29,15 @@ export default class App extends Component {
                 'Camera Permissions', // dialog title
                 'We require camera permissions to use the torch on the back of your phone.' // dialog body
             );
+            if (this.state.nEstadoTorch){
+                this.setState({nEstadoTorch: false})
+            } else{
+                this.setState({nEstadoTorch: true})
+            }
 
+            
             if (cameraAllowed) {
-                Torch.switchState(true);
+                Torch.switchState(this.state.nEstadoTorch);
                 // alert("prendio");
             }
         }
@@ -46,26 +62,26 @@ export default class App extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#CCF5C0',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#CCF5C0',
     },
     title: {
-      textAlign: 'center',
-      marginVertical: 8,
+        textAlign: 'center',
+        marginVertical: 8,
     },
     button: {
-      display: 'flex',
-      height: 200,
-      width: 200,
-      borderRadius: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#2AC062',
-      shadowColor: '#2AC062',
-      shadowOpacity: 0.4,
-      shadowOffset: { height: 10, width: 0 },
-      shadowRadius: 20,
+        display: 'flex',
+        height: 200,
+        width: 200,
+        borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2AC062',
+        shadowColor: '#2AC062',
+        shadowOpacity: 0.4,
+        shadowOffset: { height: 10, width: 0 },
+        shadowRadius: 20,
     },
-  });
+});
